@@ -1,0 +1,32 @@
+//type narrowing
+
+// this.slots.get(slotId)
+// has type:
+// parkingslot | undefined
+
+
+// doesn't use Map.has() to narrow a later Map.get() call.
+
+// What does ! mean?
+// this.Vehicles.get(vid)!
+
+// The ! is TypeScript's non-null assertion operator.
+// Map.get() can return undefined:
+// this.Vehicles.get(vid)
+
+// has a type roughly like:
+// Vehicle | undefined
+
+// You're telling TypeScript:
+// "I guarantee this vehicle exists. Don't complain about undefined."
+
+// So:
+// this.Vehicles.get(vid)!.status
+
+// means:
+// Get the vehicle with vid, assume it exists, then access its status.
+
+// ⚠️ If it actually doesn't exist at runtime:
+// this.Vehicles.get("wrong-id")!.status
+
+// you can get a runtime error.
