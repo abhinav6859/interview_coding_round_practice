@@ -45,6 +45,9 @@ class system {
     if (user1 === undefined) {
       throw new Error(`User not present of Id : ${Id}`);
     }
+    for(let p of this.stocks.values()){
+    console.log(p.price);
+    }
     return user1.getHoldings();
   }
   currentBalance(Id: string): number {
@@ -61,6 +64,31 @@ class system {
     }
     return user1.profitLoss()
   }
+  
+unrealizedProfitLoss(userId: string): number {
+  const user = this.users.get(userId);
+
+  if (!user) {
+    throw new Error(`Invalid User Id: ${userId}`);
+  }
+
+  const holdings = user.getHoldings();
+  let totalProfitLoss = 0;
+
+  for (const holding of holdings) {
+    const stock = this.stocks.get(holding.sym);
+
+    if (!stock) {
+      throw new Error(`Stock not found: ${holding.sym}`);
+    }
+
+    totalProfitLoss +=
+      (stock.price - holding.average_price) * holding.quantity;
+  }
+
+  return totalProfitLoss;
+}
+
    transactionHistory(Id:string){
     const user1 = this.users.get(Id);
     if (user1 === undefined) {
@@ -76,6 +104,7 @@ system1.addstock("TCS", "tata", 800);
 system1.addstock("KPIT", "kpit tech", 800);
 
 system1.addUser("abhinav", "6206008078",100000);
+system1.buyStock("6206008078", "WIP", 10, 900);
 system1.buyStock("6206008078", "TCS", 10, 900);
 system1.sellStock("6206008078", "TCS", 5, 1000);
 system1.sellStock("6206008078", "TCS", 5, 1200);
@@ -83,4 +112,5 @@ console.log(system1.getStock());
 console.log(system1.getHoldings("6206008078"));
 console.log("current balace is :",system1.currentBalance("6206008078"));
 console.log(system1.transactionHistory("6206008078"));
-console.log("Overall Profit and Loss :",system1.profitLoss("6206008078"))
+console.log("Overall Profit and Loss :",system1.profitLoss("6206008078")) 
+console.log("Overall Profit and Loss :",system1.unrealizedProfitLoss("6206008078")) 
