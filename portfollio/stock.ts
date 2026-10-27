@@ -1,6 +1,6 @@
 // Create a Stock model with symbol, name, and price.
 
-class stock{
+class Stock{
 constructor(
     public readonly sym:string,
     public readonly name:string,
@@ -17,3 +17,5 @@ if(!Number.isFinite(price) || price<=0 ){
 }
 }
 }
+
+export default Stock;

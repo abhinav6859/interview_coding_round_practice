@@ -35,18 +35,3 @@
 
 
 // Assume stock prices are supplied by your system; you do not need a live market API. Use integer paise or a consistent decimal strategy to avoid floating-point currency errors.
-class BankAccount {
-  constructor(
-    public readonly id: string,
-    public balance: number
-  ) {}
-
-  deposit(amount: number): void {
-    this.balance += amount;
-  }
-}
-
-const account = new BankAccount("A101", 1000);
-account.deposit(500);
-
-console.log(account.balance);

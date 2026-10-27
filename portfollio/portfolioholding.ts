@@ -1,7 +1,8 @@
 class portfolioholding{
+  
      constructor(
-     public userid :string,
-     public stockid:string,
+     
+     public sym:string,
      public quantity:number,
      public average_price:number
 
@@ -15,3 +16,4 @@ if(!Number.isFinite(average_price) || average_price<=0 ){
 }
     }
 }
+export default portfolioholding;
